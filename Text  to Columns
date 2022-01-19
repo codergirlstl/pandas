@@ -1,0 +1,89 @@
+import pandas as pd
+
+ 
+
+# read the VR calls excel sheet
+
+dataframe = pd.read_excel("VR Positive Calls.xlsx", skiprows =2, converters={'UCID': str})
+
+ 
+
+print(dataframe)
+
+ 
+
+# Paste Negative in H column (Positive/Negative Disposition)
+
+dataframe['Positive/Negative Dispositon'] = 'Positive'
+
+dataframe
+
+ 
+
+ 
+
+           
+
+#Split AGENT NAME COLUMN[B] to AGENT NAME[I] and PID[J]
+
+ 
+
+# new data frame with split value columns
+
+newdataframe = dataframe['Agent Name'].str.split("(", n = 1, expand = True)
+
+ 
+
+# making separate first name column from new data frame
+
+dataframe['Agent Name 2']= newdataframe[0]
+
+ 
+
+# split the last parentheses
+
+newestdataframe=newdataframe[1].str.split(")", n = 1, expand = True)
+
+ 
+
+# making separate last name column from new data frame
+
+dataframe['PID']= newestdataframe[0]
+
+ 
+
+# new dataframe display
+
+dataframe
+
+ 
+
+#keep date in MM-DD-YYYY format
+
+dataframe['Recorded Date'] = dataframe['Recorded Date'].dt.strftime('%m/%d/%Y')
+
+ 
+
+#convert UCIDs to text
+
+dataframe['UCID'] = dataframe['UCID'].apply(str)
+
+ 
+
+ 
+
+print(dataframe.dtypes)
+
+ 
+
+# Print Dataframe to check
+
+print(dataframe)
+
+ 
+
+#Convert to new VCRcalls excel sheet
+
+dataframe.to_excel('VRcallsupdatedpositive3.xlsx', index=False)
+
+ 
