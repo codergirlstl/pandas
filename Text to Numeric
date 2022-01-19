@@ -1,0 +1,35 @@
+import pandas as pd
+
+ 
+
+#read in latest hr num lookup up table
+
+dataframe = pd.read_excel("HrNumLookUpTable_w_Call_Center_01_19_2022.xlsx")
+
+ 
+
+#print dataframe
+
+print(dataframe)
+
+ 
+
+# convert the hr num column from text to numeric
+
+dataframe['hrnum'] = dataframe['hrnum'].apply(pd.to_numeric)
+
+ 
+
+# print data types to check that hr num is now an int
+
+print(dataframe.dtypes)
+
+ 
+
+ 
+
+# create new excel sheet
+
+dataframe.to_excel("hrnumconversionVRJan13.xlsx",
+
+             sheet_name='Sheet_1')
