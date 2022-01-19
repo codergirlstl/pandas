@@ -1,0 +1,57 @@
+# import module
+
+import pandas as pd
+
+ 
+
+# Read excel file
+
+# and store into a DataFrame
+
+df1 = pd.read_excel('VRcallsupdatednegative1.xlsx', converters={'UCID': str})
+
+df2 = pd.read_excel('VRcallsupdatedpositive1.xlsx', converters={'UCID': str})
+
+df3 = pd.read_excel('VRcallsupdatednegative2.xlsx', converters={'UCID': str})
+
+df4 = pd.read_excel('VRcallsupdatedpositive2.xlsx', converters={'UCID': str})
+
+df5 = pd.read_excel('VRcallsupdatednegative2.xlsx', converters={'UCID': str})
+
+df6 = pd.read_excel('VRcallsupdatedpositive3.xlsx', converters={'UCID': str})
+
+ 
+
+# concat both DataFrame into a single DataFram
+
+df = pd.concat([df1, df2, df3, df4, df5, df6])
+
+                   
+
+print(df)
+
+ 
+
+#convert UCIDs to text
+
+df['UCID'] = df['UCID'].apply(str)
+
+ 
+
+print(df.dtypes)
+
+ 
+
+df.info()
+
+ 
+
+print(df)
+
+ 
+
+# Export Dataframe into Excel file
+
+df.to_excel('VRcallscombinedJan10.xlsx', index=False)
+
+ 
