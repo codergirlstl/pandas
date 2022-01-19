@@ -1,0 +1,48 @@
+#VLOOKUP Pandas
+
+#import pandas library
+
+import pandas as pd
+
+#read merged and numconversion excel sheets
+
+dataframe1 =pd.read_excel("VRJan19mergedfiles.xlsx")
+
+dataframe2=pd.read_excel("hrnumconversionVRJan19.xlsx")
+
+ 
+
+# merge two sheets together
+
+newdataframe= dataframe1.merge(dataframe2, on=["hrnum"], how="left")
+
+ 
+# print newdataframe
+
+newdataframe
+
+print(newdataframe)
+
+ 
+#Drop 3 columns: BC, BD, and BG
+
+newdataframe.drop(columns = ["Unnamed: 0_y"], inplace = True)
+
+newdataframe.drop(columns = ["job_title"], inplace = True)
+
+newdataframe.drop(columns =["3-Month Overall Stack Rank %"], inplace = True)
+
+ 
+
+#print dataframe after the columns are dropped
+
+print(newdataframe)
+
+ 
+
+#Create new excel sheet with the new merged dataframe
+
+newdataframe.to_excel("DataAnalytics1.13.xlsx", index=False)
+
+ 
+
